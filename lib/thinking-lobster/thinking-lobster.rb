@@ -19,7 +19,6 @@ module ThinkingLobster
   #   end
   #   self.next_review = TimeDate.now + current_interval.hours
   #   self.winning_streak += 1
-
   #   times_reviewed += 1
   #   return self
   # end

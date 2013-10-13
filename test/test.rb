@@ -1,11 +1,4 @@
-require 'test/unit'
-require 'mongo'
-require 'mongoid'
-require 'pry'
-require_relative '../lib/thinking-lobster/thinking-lobster'
-
-#Setup the databse..
-Mongoid.load!('test/database.yml', :test)
+require 'spec_helper'
 
 #Make a simple document for test cases.
 class Item
