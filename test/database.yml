@@ -1,0 +1,6 @@
+test:
+  sessions:
+    default:
+      database: thinking_lobster_test_suite
+      hosts:
+        - localhost:27017
