@@ -15,7 +15,7 @@ module ThinkingLobster
     if current_interval < 32
       self.review_time= Time.now + (current_interval * 2).hours
     else
-       *= 1.4
+       self.review_time*= 1.4
     end
     self.next_review = TimeDate.now + current_interval.hours
     self.winning_streak += 1
