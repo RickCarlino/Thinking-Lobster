@@ -10,26 +10,26 @@ module ThinkingLobster
     collection.send :field, :review_time, type: Time, default: ->{Time.now + 4.hours}
   end
 
-  def mark_correct
-    current_interval = (Time.now - self.review_time).to_hours
-    if current_interval < 32
-      self.review_time= Time.now + (current_interval * 2).hours
-    else
-       *= 1.4
-    end
-    self.next_review = TimeDate.now + current_interval.hours
-    self.winning_streak += 1
+  # def mark_correct
+  #   current_interval = (Time.now - self.review_time).to_hours
+  #   if current_interval < 32
+  #     self.review_time= Time.now + (current_interval * 2).hours
+  #   else
+  #      *= 1.4
+  #   end
+  #   self.next_review = TimeDate.now + current_interval.hours
+  #   self.winning_streak += 1
 
-    times_reviewed += 1
-    return self
-  end
+  #   times_reviewed += 1
+  #   return self
+  # end
 
-  def mark_incorrect
-    self.current_interval = 4
-    self.streak = 0
-    times_reviewed += 1
-    self.next_review = TimeDate.now
-    return self
-  end
+  # def mark_incorrect
+  #   self.current_interval = 4
+  #   self.streak = 0
+  #   times_reviewed += 1
+  #   self.next_review = TimeDate.now
+  #   return self
+  # end
 
 end
