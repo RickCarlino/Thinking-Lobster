@@ -10,7 +10,8 @@ end
 class ThinkingLobsterTest < Test::Unit::TestCase
  
   def setup
-    @item = Item.create
+    @current_time = Time.now
+    @item = Item.create(review_due_at: (@current_time - 2.hours))
   end
 
   def teardown
@@ -18,23 +19,39 @@ class ThinkingLobsterTest < Test::Unit::TestCase
   end
 
   def test_times_reviewed
-    assert_equal(@item.has_attribute?(:times_reviewed), true)
+    assert_respond_to(@item, :times_reviewed)
     assert_instance_of(Fixnum, @item.times_reviewed)
   end
 
   def test_winning_streak
-    assert_equal(@item.has_attribute?(:winning_streak), true)
+    assert_respond_to(@item, :winning_streak)
     assert_instance_of(Fixnum, @item.winning_streak)
   end
 
   def test_losing_streak
-    assert_equal(@item.has_attribute?(:losing_streak), true)
+    assert_respond_to(@item, :losing_streak)
     assert_instance_of(Fixnum, @item.losing_streak)
   end
 
-  def test_review_time
-    assert_equal(@item.has_attribute?(:review_time), true)
-    assert_instance_of(Time, @item.review_time)
+  def test_review_due_at
+    assert_respond_to(@item, :review_due_at)
+    assert_instance_of(Time, @item.review_due_at)
+  end
+
+  def test_new_correct
+    @item.mark_correct!(@current_time)
+    correct_review_time = @current_time + 4.hours
+    assert_equal(1, @item.winning_streak)
+    assert_equal(0, @item.losing_streak)
+    assert_equal(correct_review_time, @item.review_due_at)
+  end
+
+  def test_new_incorrect
+    @item.mark_incorrect!(@current_time)
+    correct_review_time = @current_time + 2.hours
+    assert_equal(0, @item.winning_streak)
+    assert_equal(1, @item.losing_streak)
+    assert_equal(correct_review_time, @item.review_due_at)
   end
 
 end
