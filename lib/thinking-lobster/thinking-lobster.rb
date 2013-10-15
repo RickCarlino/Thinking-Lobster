@@ -68,6 +68,8 @@ private
   end
 
   def old_item_incorrect(current_time)
+    self.current_interval /= 3
+    self.review_due_at    = current_time
   end
 
   def increment_wins
