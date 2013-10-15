@@ -6,7 +6,7 @@ module ThinkingLobster
  # [x] Initial creation
  # []  reviewing an item waayy after it was due.
  # []  reviewing an item too soon.
- # [-]  New item incorrect
+ # [X]  New item incorrect
  # []  Old item incorrect
  # [x] New item correct
  # [] Old item correct
@@ -16,7 +16,9 @@ module ThinkingLobster
  # [] Remove active support dependecy in favor of manual caluclations for .days, .hours, etc
 
   def self.included(collection)
-    # collection.send :field, :current_interval, type: Integer, default: 4
+    #Make all of the hardcoded 2's a user defined variable.
+    collection.send :field, :current_interval, type: Integer, default: 2
+    collection.send :validates, :current_interval, numericality: { greater_than: 0 }
     collection.send :field, :times_reviewed, type: Integer, default: 0
     collection.send :field, :winning_streak, type: Integer, default: 0
     collection.send :field, :losing_streak, type: Integer, default: 0
@@ -38,6 +40,7 @@ module ThinkingLobster
     time_since_due = (self.review_due_at - current_time)
     increment_losses
     if time_since_due < 36.hours
+      #Review time after early failure is Time.now
       new_item_incorrect(current_time)
     else
       old_item_incorrect(current_time)
@@ -50,8 +53,9 @@ private
   def new_item_correct(current_time)
     #Takes the interval between current_time and the time the item was due
     # And doubles that amount of time.
-    next_review = (current_time - self.review_due_at)*2
-    self.review_due_at = current_time + next_review
+    interval = (current_time - self.review_due_at)*2 #That multiplier needs to be a variable, not hardcoded.
+    self.current_interval = interval
+    self.review_due_at = current_time + interval
   end
 
   def old_item_correct(current_time)
@@ -59,7 +63,8 @@ private
 
   def new_item_incorrect(current_time)
     #Resets progress if you don't get it right when it's new
-    self.review_due_at = Time.now + 2.hours
+    self.current_interval = 2.hours
+    self.review_due_at    = current_time
   end
 
   def old_item_incorrect(current_time)
@@ -71,8 +76,8 @@ private
   end
 
   def increment_losses
-    self.winning_streak  = 0
-    self.losing_streak   += 1
+    self.winning_streak = 0
+    self.losing_streak += 1
   end
 
 end
