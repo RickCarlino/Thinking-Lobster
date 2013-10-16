@@ -4,8 +4,7 @@ class ShortTermReviewTest < Test::Unit::TestCase
  
   def setup
     @current_time = Time.now
-    @item         = Item.create
-    @old_item     = Item.create(review_due_at: @current_time + 37.hours)
+    @item         = Item.create(review_due_at: @current_time - 2.hours)
   end
 
   def teardown

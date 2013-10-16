@@ -4,6 +4,7 @@ class ThinkingLobsterBaseTest < Test::Unit::TestCase
  
   def setup
     @item         = Item.create
+    @current_time = Time.now
   end
 
   def teardown
@@ -28,6 +29,12 @@ class ThinkingLobsterBaseTest < Test::Unit::TestCase
   def test_review_due_at
     assert_respond_to(@item, :review_due_at)
     assert_instance_of(Time, @item.review_due_at)
+  end
+
+  def test_time_since_due()
+    desired_time_difference = @current_time - @item.review_due_at
+    actual_time_difference  = @item.send(:time_since_due,@current_time)
+    assert_equal(desired_time_difference, actual_time_difference)
   end
 
 end
