@@ -4,7 +4,7 @@ module ThinkingLobster
 
 #Test Scenarios:
  # [x] Initial creation
- # []  reviewing an item too soon.
+ # []  reviewing an item too soon. (Gracefully do nothing- shouldn't be a design goal to handle this situation.)
  # [X]  New item incorrect
  # []  Old item incorrect
  # [x] New item correct
@@ -23,7 +23,7 @@ module ThinkingLobster
     collection.send :field, :winning_streak, type: Integer, default: 0
     collection.send :field, :losing_streak, type: Integer, default: 0
     collection.send :field, :review_due_at, type: Time, default: ->{Time.now}
-    collection.send :field, :previous_review_time, type: Time
+    collection.send :field, :previous_review, type: Time
   end
 
   def mark_correct!(current_time = Time.now)
@@ -54,7 +54,7 @@ module ThinkingLobster
       self.set_previous_review!
       self.review_due_at += time_since_due(current_time) * 2
     else
-      self.set_previous_review!
+      self.set_previous_review!(current_time)
       self.review_due_at = current_time + 2.hours
     end
 
@@ -73,11 +73,13 @@ module ThinkingLobster
   end
 
   def increment_wins
+    self.times_reviewed += 1
     self.winning_streak += 1
     self.losing_streak   = 0
   end
 
   def increment_losses
+    self.times_reviewed += 1
     self.winning_streak = 0
     self.losing_streak += 1
   end
@@ -86,11 +88,16 @@ module ThinkingLobster
     current_time - self.review_due_at
   end
 
-  def set_previous_review!
-    self.previous_review_time = self.review_due_at
+  def set_previous_review!(current_time = Time.now)
+    if self.previous_review?
+      self.previous_review = self.review_due_at
+    else
+      #For items that don't have a previous review time.
+      self.previous_review = current_time
+    end
   end
 
   def previous_review?
-    self.previous_review_time != nil
+    self.previous_review != nil
   end
 end

@@ -18,7 +18,7 @@ class TestFirstReview < Test::Unit::TestCase
     assert_equal(1, @item.winning_streak)
     assert_equal(0, @item.losing_streak)
     assert_equal(correct_review_time, @item.review_due_at)
-    assert_equal(old_review_time, @item.previous_review_time)
+    assert_equal(old_review_time.to_i, @item.previous_review.to_i)
   end
 
   def test_new_incorrect
