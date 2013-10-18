@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class ThinkingLobsterBaseTest < Test::Unit::TestCase
- 
+
   def setup
     @item         = Item.create
     @current_time = Time.now
@@ -37,4 +37,14 @@ class ThinkingLobsterBaseTest < Test::Unit::TestCase
     assert_equal(desired_time_difference, actual_time_difference)
   end
 
+  def test_too_soon?
+    assert_equal(false, @item.send(:too_soon?, @current_time + 4.hours))
+    assert_equal(true,  @item.send(:too_soon?, @current_time - 4.hours))
+  end
+
+  def test_previous_review?
+    assert_equal(false, @item.previous_review?)
+    @item.update_attributes(previous_review: Time.now - 6.hours)
+    assert_equal(true, @item.previous_review?)
+  end
 end

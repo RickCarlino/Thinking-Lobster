@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 class TestFirstReview < Test::Unit::TestCase
- 
+
   def setup
     @current_time = Time.now
-    @item         = Item.create
+    @item         = Item.create(review_due_at: @current_time)
   end
 
   def teardown

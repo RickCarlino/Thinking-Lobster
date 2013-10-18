@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ThinkingLobster</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Module</span> 
+            ThinkingLobster 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/lib/thinking-lobster/thinking-lobster_rb.html">lib/thinking-lobster/thinking-lobster.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-included">included</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-increment_losses">increment_losses</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-increment_wins">increment_wins</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-mark_correct-21">mark_correct!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-mark_incorrect-21">mark_incorrect!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-new_item_correct">new_item_correct</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-new_item_incorrect">new_item_incorrect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-old_item_correct">old_item_correct</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-old_item_incorrect">old_item_incorrect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-previous_review-3F">previous_review?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-set_previous_review-21">set_previous_review!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-time_since_due">time_since_due</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-too_soon-3F">too_soon?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-included">
+            
+              <b>included</b>(collection)
+            
+            <a href="../classes/ThinkingLobster.html#method-c-included" name="method-c-included" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Includes a set of fields and support methods into the base class. Mongoid
+must be included in the base class.</p>
+
+<h4 id="method-c-included-label-Examples">Examples</h4>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">FlashCard</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">Mongoid</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ThinkingLobster</span>
+  <span class="ruby-identifier">field</span> :<span class="ruby-identifier">question</span>
+  <span class="ruby-identifier">field</span> :<span class="ruby-identifier">answer</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-included_source')" id="l_method-c-included_source">show</a>
+                
+              </p>
+              <div id="method-c-included_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">collection</span>)
+  <span class="ruby-comment">#Make all of the hardcoded 2&#39;s a user defined variable.</span>
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">:field</span>, <span class="ruby-value">:times_reviewed</span>,  <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-number">0</span>
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">:field</span>, <span class="ruby-value">:winning_streak</span>,  <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-number">0</span>
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">:field</span>, <span class="ruby-value">:losing_streak</span>,   <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-number">0</span>
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">:field</span>, <span class="ruby-value">:review_due_at</span>,   <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>,<span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span>{<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>}
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">:field</span>, <span class="ruby-value">:previous_review</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-mark_correct-21">
+            
+              <b>mark_correct!</b>(current_time = Time.now)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-mark_correct-21" name="method-i-mark_correct-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Marks the item correct and increases the item&#39;s review intervals 
+accordingly. Takes no action if review takes place before the scheduled
+review time.</p>
+<ul><li>
+<p><code>current_time</code> - Time object by which review times are set. This</p>
+</li></ul>
+
+<p>parameter is typically left to its default value but may be useful for 
+testing or special use cases.</p>
+
+<p>Returns an instance of the base class</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-mark_correct-21_source')" id="l_method-i-mark_correct-21_source">show</a>
+                
+              </p>
+              <div id="method-i-mark_correct-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">mark_correct!</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">too_soon?</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-identifier">increment_wins</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_since_due</span>(<span class="ruby-identifier">current_time</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-number">36</span>.<span class="ruby-identifier">hours</span>
+    <span class="ruby-identifier">new_item_correct</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">old_item_correct</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-mark_incorrect-21">
+            
+              <b>mark_incorrect!</b>(current_time = Time.now)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-mark_incorrect-21" name="method-i-mark_incorrect-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Marks the item incorrect and shortens the review interval.</p>
+<ul><li>
+<p><code>current_time</code> - Time object by which review times are set.</p>
+</li></ul>
+
+<p>Defaults to Time.now This parameter is typically left to its default value
+but may be useful for  testing or special use cases.</p>
+
+<p>Returns an instance of the base class.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-mark_incorrect-21_source')" id="l_method-i-mark_incorrect-21_source">show</a>
+                
+              </p>
+              <div id="method-i-mark_incorrect-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">mark_incorrect!</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+  <span class="ruby-identifier">increment_losses</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_since_due</span>(<span class="ruby-identifier">current_time</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-number">36</span>.<span class="ruby-identifier">hours</span>
+    <span class="ruby-comment">#Review time after early failure is Time.now</span>
+    <span class="ruby-identifier">new_item_incorrect</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">old_item_incorrect</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-previous_review-3F">
+            
+              <b>previous_review?</b>()
+            
+            <a href="../classes/ThinkingLobster.html#method-i-previous_review-3F" name="method-i-previous_review-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-previous_review-3F_source')" id="l_method-i-previous_review-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-previous_review-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">previous_review?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">previous_review</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-time_since_due">
+            
+              <b>time_since_due</b>(current_time = Time.now)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-time_since_due" name="method-i-time_since_due" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Indicates quantity of time since the item became ready for a review. This
+method is under consideration for deprecation in favor of a method which 
+returns time since the last review.</p>
+<ul><li>
+<p><code>current_time</code> - Time object which defaults to
+<code>Time.now</code>. This</p>
+</li></ul>
+
+<p>is the time by which the method compares.</p>
+
+<p>Returns an Integer</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-time_since_due_source')" id="l_method-i-time_since_due_source">show</a>
+                
+              </p>
+              <div id="method-i-time_since_due_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time_since_due</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+  <span class="ruby-identifier">current_time</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-too_soon-3F">
+            
+              <b>too_soon?</b>(current_time = Time.now)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-too_soon-3F" name="method-i-too_soon-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Indicates if a review would be &#39;premature&#39; at the indicated time.</p>
+<ul><li>
+<p><code>current_time</code> - Time object which defaults to
+<code>Time.now</code>. This</p>
+</li></ul>
+
+<p>is the time by which the method compares.</p>
+
+<p>Returns a Boolean</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-too_soon-3F_source')" id="l_method-i-too_soon-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-too_soon-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">too_soon?</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+  <span class="ruby-identifier">too_soon</span> = <span class="ruby-identifier">current_time</span> <span class="ruby-operator">&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">too_soon</span> <span class="ruby-keyword">then</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">else</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-increment_losses">
+            
+              <b>increment_losses</b>()
+            
+            <a href="../classes/ThinkingLobster.html#method-i-increment_losses" name="method-i-increment_losses" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-increment_losses_source')" id="l_method-i-increment_losses_source">show</a>
+                
+              </p>
+              <div id="method-i-increment_losses_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">increment_losses</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">times_reviewed</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">winning_streak</span>  = <span class="ruby-number">0</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">losing_streak</span>  <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-increment_wins">
+            
+              <b>increment_wins</b>()
+            
+            <a href="../classes/ThinkingLobster.html#method-i-increment_wins" name="method-i-increment_wins" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-increment_wins_source')" id="l_method-i-increment_wins_source">show</a>
+                
+              </p>
+              <div id="method-i-increment_wins_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">increment_wins</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">times_reviewed</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">winning_streak</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">losing_streak</span>   = <span class="ruby-number">0</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-new_item_correct">
+            
+              <b>new_item_correct</b>(current_time)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-new_item_correct" name="method-i-new_item_correct" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-new_item_correct_source')" id="l_method-i-new_item_correct_source">show</a>
+                
+              </p>
+              <div id="method-i-new_item_correct_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">new_item_correct</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-comment">#Takes the interval between current_time and the time the item was due</span>
+  <span class="ruby-comment"># And doubles that amount of time.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">previous_review?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_previous_review!</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">time_since_due</span>(<span class="ruby-identifier">current_time</span>) * <span class="ruby-number">2</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_previous_review!</span>(<span class="ruby-identifier">current_time</span>)
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span> = <span class="ruby-identifier">current_time</span> <span class="ruby-operator">+</span> <span class="ruby-number">2</span>.<span class="ruby-identifier">hours</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-new_item_incorrect">
+            
+              <b>new_item_incorrect</b>(current_time)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-new_item_incorrect" name="method-i-new_item_incorrect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-new_item_incorrect_source')" id="l_method-i-new_item_incorrect_source">show</a>
+                
+              </p>
+              <div id="method-i-new_item_incorrect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">new_item_incorrect</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>    = <span class="ruby-identifier">current_time</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-old_item_correct">
+            
+              <b>old_item_correct</b>(current_time)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-old_item_correct" name="method-i-old_item_correct" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-old_item_correct_source')" id="l_method-i-old_item_correct_source">show</a>
+                
+              </p>
+              <div id="method-i-old_item_correct_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">old_item_correct</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-comment">#TODO: Monkey patch class Time and DRY the following line into a helper</span>
+  <span class="ruby-identifier">hours_ago</span>             = <span class="ruby-identifier">time_since_due</span>(<span class="ruby-identifier">current_time</span>)<span class="ruby-operator">/</span><span class="ruby-number">60</span><span class="ruby-operator">/</span><span class="ruby-number">60</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>    = <span class="ruby-identifier">current_time</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">hours_ago</span> * <span class="ruby-number">1.25</span>).<span class="ruby-identifier">hours</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-old_item_incorrect">
+            
+              <b>old_item_incorrect</b>(current_time)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-old_item_incorrect" name="method-i-old_item_incorrect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-old_item_incorrect_source')" id="l_method-i-old_item_incorrect_source">show</a>
+                
+              </p>
+              <div id="method-i-old_item_incorrect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">old_item_incorrect</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-comment">#TODO: Monkey patch class Time and DRY the following line into a helper</span>
+  <span class="ruby-identifier">hours_ago</span>             = <span class="ruby-identifier">time_since_due</span>(<span class="ruby-identifier">current_time</span>)<span class="ruby-operator">/</span><span class="ruby-number">60</span><span class="ruby-operator">/</span><span class="ruby-number">60</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>    = <span class="ruby-identifier">current_time</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">hours_ago</span> * <span class="ruby-number">0.25</span>).<span class="ruby-identifier">hours</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-set_previous_review-21">
+            
+              <b>set_previous_review!</b>(current_time = Time.now)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-set_previous_review-21" name="method-i-set_previous_review-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-set_previous_review-21_source')" id="l_method-i-set_previous_review-21_source">show</a>
+                
+              </p>
+              <div id="method-i-set_previous_review-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking-lobster/thinking-lobster.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">set_previous_review!</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">previous_review?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">previous_review</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment">#For items that don&#39;t have a previous review time.</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">previous_review</span> = <span class="ruby-identifier">current_time</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

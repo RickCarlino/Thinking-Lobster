@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ThinkingLobsterBaseTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span> 
+            ThinkingLobsterBaseTest 
+            
+                <span class="parent">&lt; 
+                    
+                    Test::Unit::TestCase
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/test/test_base_rb.html">test/test_base.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-setup">setup</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-teardown">teardown</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_losing_streak">test_losing_streak</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_previous_review-3F">test_previous_review?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_review_due_at">test_review_due_at</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_time_since_due">test_time_since_due</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_times_reviewed">test_times_reviewed</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_too_soon-3F">test_too_soon?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_winning_streak">test_winning_streak</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-setup">
+            
+              <b>setup</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-setup" name="method-i-setup" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-setup_source')" id="l_method-i-setup_source">show</a>
+                
+              </p>
+              <div id="method-i-setup_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">setup</span>
+  <span class="ruby-ivar">@item</span>         = <span class="ruby-constant">Item</span>.<span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-teardown">
+            
+              <b>teardown</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-teardown" name="method-i-teardown" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-teardown_source')" id="l_method-i-teardown_source">show</a>
+                
+              </p>
+              <div id="method-i-teardown_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">teardown</span>
+  <span class="ruby-constant">Item</span>.<span class="ruby-identifier">destroy_all</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_losing_streak">
+            
+              <b>test_losing_streak</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-test_losing_streak" name="method-i-test_losing_streak" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_losing_streak_source')" id="l_method-i-test_losing_streak_source">show</a>
+                
+              </p>
+              <div id="method-i-test_losing_streak_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_losing_streak</span>
+  <span class="ruby-identifier">assert_respond_to</span>(<span class="ruby-ivar">@item</span>, <span class="ruby-value">:losing_streak</span>)
+  <span class="ruby-identifier">assert_instance_of</span>(<span class="ruby-constant">Fixnum</span>, <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">losing_streak</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_previous_review-3F">
+            
+              <b>test_previous_review?</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-test_previous_review-3F" name="method-i-test_previous_review-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_previous_review-3F_source')" id="l_method-i-test_previous_review-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-test_previous_review-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_previous_review?</span>
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">false</span>, <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">previous_review?</span>)
+  <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">previous_review</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-number">6</span>.<span class="ruby-identifier">hours</span>)
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">previous_review?</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_review_due_at">
+            
+              <b>test_review_due_at</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-test_review_due_at" name="method-i-test_review_due_at" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_review_due_at_source')" id="l_method-i-test_review_due_at_source">show</a>
+                
+              </p>
+              <div id="method-i-test_review_due_at_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_review_due_at</span>
+  <span class="ruby-identifier">assert_respond_to</span>(<span class="ruby-ivar">@item</span>, <span class="ruby-value">:review_due_at</span>)
+  <span class="ruby-identifier">assert_instance_of</span>(<span class="ruby-constant">Time</span>, <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">review_due_at</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_time_since_due">
+            
+              <b>test_time_since_due</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-test_time_since_due" name="method-i-test_time_since_due" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_time_since_due_source')" id="l_method-i-test_time_since_due_source">show</a>
+                
+              </p>
+              <div id="method-i-test_time_since_due_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_time_since_due</span>()
+  <span class="ruby-identifier">desired_time_difference</span> = <span class="ruby-ivar">@current_time</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">review_due_at</span>
+  <span class="ruby-identifier">actual_time_difference</span>  = <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:time_since_due</span>,<span class="ruby-ivar">@current_time</span>)
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">desired_time_difference</span>, <span class="ruby-identifier">actual_time_difference</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_times_reviewed">
+            
+              <b>test_times_reviewed</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-test_times_reviewed" name="method-i-test_times_reviewed" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_times_reviewed_source')" id="l_method-i-test_times_reviewed_source">show</a>
+                
+              </p>
+              <div id="method-i-test_times_reviewed_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_times_reviewed</span>
+  <span class="ruby-identifier">assert_respond_to</span>(<span class="ruby-ivar">@item</span>, <span class="ruby-value">:times_reviewed</span>)
+  <span class="ruby-identifier">assert_instance_of</span>(<span class="ruby-constant">Fixnum</span>, <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">times_reviewed</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_too_soon-3F">
+            
+              <b>test_too_soon?</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-test_too_soon-3F" name="method-i-test_too_soon-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_too_soon-3F_source')" id="l_method-i-test_too_soon-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-test_too_soon-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_too_soon?</span>
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">false</span>, <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:too_soon?</span>, <span class="ruby-ivar">@current_time</span> <span class="ruby-operator">+</span> <span class="ruby-number">4</span>.<span class="ruby-identifier">hours</span>))
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>,  <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:too_soon?</span>, <span class="ruby-ivar">@current_time</span> <span class="ruby-operator">-</span> <span class="ruby-number">4</span>.<span class="ruby-identifier">hours</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_winning_streak">
+            
+              <b>test_winning_streak</b>()
+            
+            <a href="../classes/ThinkingLobsterBaseTest.html#method-i-test_winning_streak" name="method-i-test_winning_streak" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_winning_streak_source')" id="l_method-i-test_winning_streak_source">show</a>
+                
+              </p>
+              <div id="method-i-test_winning_streak_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File test/test_base.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_winning_streak</span>
+  <span class="ruby-identifier">assert_respond_to</span>(<span class="ruby-ivar">@item</span>, <span class="ruby-value">:winning_streak</span>)
+  <span class="ruby-identifier">assert_instance_of</span>(<span class="ruby-constant">Fixnum</span>, <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">winning_streak</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    
