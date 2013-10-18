@@ -1,24 +1,25 @@
 require 'mongoid'
 require 'active_support'
 module ThinkingLobster
+require 'pry'
 
 #Test Scenarios:
  # [x] Initial creation
  # []  reviewing an item too soon. (Gracefully do nothing- shouldn't be a design goal to handle this situation.)
  # [X]  New item incorrect
- # []  Old item incorrect
+ # [X]  Old item incorrect
  # [x] New item correct
- # [] Old item correct
+ # [X] Old item correct
 
 #TODO:
- # [] Move all fixed numbers into user definable vars. eg. default review_due_at, intervals, etc
- # [] Remove active support dependecy in favor of manual caluclations for .days, .hours, etc
-
+  # [] Move all fixed numbers into user definable vars. eg. default review_due_at, intervals, etc
+  # [] Make private members private again
+  # [] Remove active support dependecy in favor of manual caluclations for .days, .hours, etc
+  # [] Write documentation
+  # [] Github pages for documentation
+  # [] wiki pages for use cases, design philosophy.
   def self.included(collection)
     #Make all of the hardcoded 2's a user defined variable.
-    #TODO: Find a way to move on without the current_interval field
-    collection.send :field, :current_interval, type: Integer, default: 2
-    collection.send :validates, :current_interval, numericality: { greater_than: 0 }
     collection.send :field, :times_reviewed, type: Integer, default: 0
     collection.send :field, :winning_streak, type: Integer, default: 0
     collection.send :field, :losing_streak, type: Integer, default: 0
@@ -34,6 +35,7 @@ module ThinkingLobster
       old_item_correct(current_time)
     end
     self.save
+    self
   end
 
   def mark_incorrect!(current_time = Time.now)
@@ -45,6 +47,7 @@ module ThinkingLobster
       old_item_incorrect(current_time)
     end
     self.save
+    self
   end
 
   def new_item_correct(current_time)
@@ -60,16 +63,20 @@ module ThinkingLobster
 
   end
 
-  def old_item_correct(current_time)
-  end
-
   def new_item_incorrect(current_time)
     self.review_due_at    = current_time
   end
 
+  def old_item_correct(current_time)
+    #TODO: Monkey patch class Time and DRY the following line into a helper
+    hours_ago             = time_since_due(current_time)/60/60
+    self.review_due_at    = current_time + (hours_ago * 1.25).hours
+  end
+
   def old_item_incorrect(current_time)
-    self.current_interval /= 3
-    self.review_due_at    = current_time
+    #TODO: Monkey patch class Time and DRY the following line into a helper
+    hours_ago             = time_since_due(current_time)/60/60
+    self.review_due_at    = current_time + (hours_ago * 0.25).hours
   end
 
   def increment_wins
@@ -80,8 +87,8 @@ module ThinkingLobster
 
   def increment_losses
     self.times_reviewed += 1
-    self.winning_streak = 0
-    self.losing_streak += 1
+    self.winning_streak  = 0
+    self.losing_streak  += 1
   end
 
   def time_since_due(current_time = Time.now)
