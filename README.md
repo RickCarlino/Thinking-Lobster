@@ -1,7 +1,7 @@
-Thinking Lobster (Pre-release)
+Thinking Lobster (Pre-release, as in, not yet released.)
 ===
 
-A repo that will need to be renamed.
+A [spaced repetition algorithm](http://en.wikipedia.org/wiki/Spaced_repetition) written in Ruby for facts that use non-scaled responses. Highly influenced by the leitner method.
 
 Goals
 ---
@@ -23,7 +23,14 @@ q = FlashCard.create(question: 'First American President', answer: 'George Washi
 # Returns a ruby Time object...
 q.review_time
 
-# Marks the item correct and automatically changes the review time...
+# Marks the item correct and automatically schedules the next review time...
+q.mark_correct!
+# => #<FlashCard id: XYZ blahblahblah....
+
+#Shrinks your interval when you answer the question incorrectly..
+q.mark_incorrect!
+# => #<FlashCard id: XYZ blahblahblah....
+
 
 ```
 
@@ -34,7 +41,7 @@ Installation
 gem install thinking-lobster
 ```
 
-or with bundler via
+or in your Gemfile with bundler via
 
 ```gem 'thinking-lobster'```
 
