@@ -14,8 +14,10 @@ Examples
 class FlashCard
   include Mongoid::Document
   include ThinkingLobster
+
   field :question
   field :answer
+
 end
 
 q = FlashCard.create(question: 'First American President', answer: 'George Washington')
@@ -31,16 +33,16 @@ q.mark_correct!
 q.mark_incorrect!
 # => #<FlashCard 0x123>
 
-# q.previous_review?
+q.previous_review?
 #returns instance of Time
 # => 2013-10-19 22:06:28 -0700
 
-# q.time_since_due
+q.time_since_due
 #Returns number of seconds since it was due
 # => 2335243423
 
 # The point of using an SRS is reviewing LESS, not more. This method lets you know if its not time to review yet...
-#q.too_soon?
+q.too_soon?
 # => true
 
 ```
@@ -68,8 +70,7 @@ Licensed under the MIT License. See license.txt for more information.
 
 Contributors
 ---
-
- * Brett Byler
  * Rick Carlino
+ * Brett Byler
 
 Please add your name to this list if submitting a pull request.
