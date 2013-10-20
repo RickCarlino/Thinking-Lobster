@@ -8,7 +8,8 @@ module ThinkingLobster
   # [x] Make protected members protected again
   # [] Remove active support dependecy in favor of manual caluclations for .days, .hours, etc
   # [] Consider implementing a time_since_review method to replace time_since_due
-  # [] Write documentation
+  # [x] Write documentation
+  # [x] Update the readme.md
   # [] Github pages for sdoc documentation
   # [] wiki pages for use cases, design philosophy.
 
@@ -27,17 +28,18 @@ module ThinkingLobster
     collection.send :field, :times_reviewed,  type: Integer, default: 0
     collection.send :field, :winning_streak,  type: Integer, default: 0
     collection.send :field, :losing_streak,   type: Integer, default: 0
-    collection.send :field, :review_due_at,   type: Time,default: ->{Time.now}
+    collection.send :field, :review_due_at,   type: Time,    default: ->{Time.now}
     collection.send :field, :previous_review, type: Time
   end
 
-  # Marks the item correct and increases the item's review intervals 
-  # accordingly. Takes no action if review takes place before the
-  # scheduled review time.
+  # Marks the item correct and increases the item's review intervals accordingly. Takes no action if review takes place before the scheduled review time.
   #
-  # * <tt>current_time</tt> - Time object by which review times are set. This 
-  # parameter is typically left to its default value but may be useful for 
-  # testing or special use cases.
+  # Example:
+  #    flash_card = SomeDocument.new
+  #    flash_card.mark_correct! # => #<SomeItem:0x123>
+  #
+  # Paramters:
+  # * (Time) current_time - Time object by which review times are set. This parameter is almost always left to its default value (Time.now) but may be useful for testing or special use cases.
   #
   # Returns an instance of the base class
   def mark_correct!(current_time = Time.now)
@@ -54,16 +56,18 @@ module ThinkingLobster
 
   # Marks the item incorrect and shortens the review interval.
   #
-  # * <tt>current_time</tt> - Time object by which review times are set. 
-  # Defaults to Time.now This parameter is typically left to its default
-  # value but may be useful for 
-  # testing or special use cases.
+  # Example:
+  #    flash_card = SomeDocument.new
+  #    flash_card.mark_incorrect! # => #<SomeItem:0x123>
+  #
+  # Parameters:
+  # * (Time) current_time - Time object by which review times are set. Defaults to Time.now This parameter is typically left to its default value but may be useful for testing or special use cases.
   #
   # Returns an instance of the base class.
   def mark_incorrect!(current_time = Time.now)
     increment_losses
     if time_since_due(current_time) < 36.hours
-      #Review time after early failure is Time.now
+      #the Review time after a new item's failure is Time.now
       new_item_incorrect(current_time)
     else
       old_item_incorrect(current_time)
@@ -72,22 +76,29 @@ module ThinkingLobster
     self
   end
 
-  # Indicates quantity of time since the item became ready for a review. This
-  # method is under consideration for deprecation in favor of a method which 
-  # returns time since the last review.
+  # Indicates quantity of time since the item became ready for a review. This method is under consideration for deprecation in favor of a method which returns time since the last review.
   #
-  # * <tt>current_time</tt> - Time object which defaults to +Time.now+. This
-  # is the time by which the method compares.
+  # Example: 
+  #    flash_card = SomeDocument.new
+  #    flash_card.time_since_due
+  #    # => 144000
+  #
+  # * (Time) current_time - Time object which defaults to +Time.now+. This is the time by which the method compares.
   #
   # Returns an Integer
   def time_since_due(current_time = Time.now)
     current_time - self.review_due_at
   end
 
-  # Indicates if a review would be 'premature' at the indicated time.
+  # Indicates if a review would be 'premature' at the indicated time, meaning that the application / user is trying to review a word too often.
   #
-  # * <tt>current_time</tt> - Time object which defaults to +Time.now+. This
-  # is the time by which the method compares.
+  # Example:
+  #    flash_card = SomeDocument.new
+  #    flash_card.mark_correct! 
+  #    flash_card.too_soon? # In this example, we just finished the review. So it won't be due for a few more hours.
+  #    # => false
+  #
+  # * (Time) current_time - Time object which defaults to Time.now. This is the time by which the method compares.
   #
   # Returns a Boolean
   def too_soon?(current_time = Time.now)
@@ -95,6 +106,16 @@ module ThinkingLobster
     if too_soon then true else false end
   end
 
+  # Indicates if the item has a previous review set (which would indicate wether it is a newly added item).
+  #
+  # Example:
+  #    flash_card = SomeDocument.new
+  #    flash_card.previous_review?
+  #    # => false
+  #
+  # No parameters
+  #
+  # Returns a Boolean
   def previous_review?
     self.previous_review != nil
   end
@@ -119,13 +140,11 @@ module ThinkingLobster
   end
 
   def old_item_correct(current_time)
-    #TODO: Monkey patch class Time and DRY the following line into a helper
     hours_ago             = time_since_due(current_time)/60/60
     self.review_due_at    = current_time + (hours_ago * 1.25).hours
   end
 
   def old_item_incorrect(current_time)
-    #TODO: Monkey patch class Time and DRY the following line into a helper
     hours_ago             = time_since_due(current_time)/60/60
     self.review_due_at    = current_time + (hours_ago * 0.25).hours
   end
