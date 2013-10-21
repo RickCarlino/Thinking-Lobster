@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 class ThinkingLobsterBaseTest < Test::Unit::TestCase
-
   def setup
     @item         = Item.create
     @current_time = Time.now
@@ -31,10 +30,27 @@ class ThinkingLobsterBaseTest < Test::Unit::TestCase
     assert_instance_of(Time, @item.review_due_at)
   end
 
-  def test_time_since_due()
-    desired_time_difference = @current_time - @item.review_due_at
-    actual_time_difference  = @item.send(:time_since_due,@current_time)
-    assert_equal(desired_time_difference, actual_time_difference)
+  def test_time_since_due
+    #TODO: Refactor this. This test is not testing exact values, rather it is making sure the values are within atleast 1 second of eachother.
+    expected_value = (@current_time - @item.review_due_at).to_i
+    actual_value   = (@item.time_since_due(@current_time)).to_i
+    assert_equal(expected_value, actual_value)
+  end
+
+  def test_time_since_review
+    #For items that don't have a previous_review...
+    time_later     = @current_time + 5.hours
+    actual_value   = @item.time_since_review(time_later)
+    expected_value = time_later - @current_time
+    assert_equal(expected_value, actual_value)
+
+    #For items that do...
+    @current_time = time_later
+    time_later    = @current_time + 24.hours
+    @item.mark_correct!(@current_time)
+    actual_value   = @item.time_since_review(time_later)
+    expected_value = time_later - @current_time
+    assert_equal(expected_value, actual_value)
   end
 
   def test_too_soon?

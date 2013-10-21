@@ -30,6 +30,7 @@ module ThinkingLobster
     collection.send :field, :losing_streak,   type: Integer, default: 0
     collection.send :field, :review_due_at,   type: Time,    default: ->{Time.now}
     collection.send :field, :previous_review, type: Time
+    collection.send :include, Mongoid::Timestamps
   end
 
   # Marks the item correct and increases the item's review intervals accordingly. Takes no action if review takes place before the scheduled review time.
@@ -45,7 +46,7 @@ module ThinkingLobster
   def mark_correct!(current_time = Time.now)
     return self if self.too_soon?(current_time)
     increment_wins
-    if time_since_due(current_time) < 36.hours
+    if time_since_review(current_time) < 36.hours
       new_item_correct(current_time)
     else
       old_item_correct(current_time)
@@ -66,7 +67,7 @@ module ThinkingLobster
   # Returns an instance of the base class.
   def mark_incorrect!(current_time = Time.now)
     increment_losses
-    if time_since_due(current_time) < 36.hours
+    if time_since_review(current_time) < 36.hours
       #the Review time after a new item's failure is Time.now
       new_item_incorrect(current_time)
     else
@@ -87,7 +88,27 @@ module ThinkingLobster
   #
   # Returns an Integer
   def time_since_due(current_time = Time.now)
-    current_time - self.review_due_at
+    (current_time - self.review_due_at).to_i
+  end
+
+  # Indicates quantity of time since the item was last reviewed review. Be aware that this method is not the same thing as time_since_due().
+  #
+  # Example: 
+  #    flash_card = SomeDocument.new
+  #    flash_card.mark_correct!
+  #    # Wait 5 seconds...
+  #    flash_card.time_since_review
+  #    # => 5.0
+  #
+  # * (Time) current_time - Time object which defaults to +Time.now+. This is the time by which the method compares. Usually there is no need to provide this parameter.
+  #
+  # Returns an Integer
+  def time_since_review(current_time = Time.now)
+    if self.previous_review?
+      return (current_time - self.previous_review).to_i
+    else
+      return (current_time - self.created_at).to_i
+    end
   end
 
   # Indicates if a review would be 'premature' at the indicated time, meaning that the application / user is trying to review a word too often.
@@ -127,7 +148,7 @@ module ThinkingLobster
     # And doubles that amount of time.
     if self.previous_review?
       self.set_previous_review!
-      self.review_due_at += time_since_due(current_time) * 2
+      self.review_due_at += time_since_review(current_time) * 2
     else
       self.set_previous_review!(current_time)
       self.review_due_at = current_time + 2.hours
@@ -140,12 +161,12 @@ module ThinkingLobster
   end
 
   def old_item_correct(current_time)
-    hours_ago             = time_since_due(current_time)/60/60
+    hours_ago             = time_since_review(current_time)/60/60
     self.review_due_at    = current_time + (hours_ago * 1.25).hours
   end
 
   def old_item_incorrect(current_time)
-    hours_ago             = time_since_due(current_time)/60/60
+    hours_ago             = time_since_review(current_time)/60/60
     self.review_due_at    = current_time + (hours_ago * 0.25).hours
   end
 
