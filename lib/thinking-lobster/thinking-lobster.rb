@@ -88,7 +88,7 @@ module ThinkingLobster
   #
   # Returns an Integer
   def time_since_due(current_time = Time.now)
-    (current_time - self.review_due_at).to_i
+    current_time - self.review_due_at
   end
 
   # Indicates quantity of time since the item was last reviewed review. Be aware that this method is not the same thing as time_since_due().
@@ -105,9 +105,9 @@ module ThinkingLobster
   # Returns an Integer
   def time_since_review(current_time = Time.now)
     if self.previous_review?
-      return (current_time - self.previous_review).to_i
+      return current_time - self.previous_review
     else
-      return (current_time - self.created_at).to_i
+      return current_time - self.created_at
     end
   end
 

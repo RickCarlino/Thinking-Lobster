@@ -40,8 +40,8 @@ class ThinkingLobsterBaseTest < Test::Unit::TestCase
   def test_time_since_review
     #For items that don't have a previous_review...
     time_later     = @current_time + 5.hours
-    actual_value   = @item.time_since_review(time_later)
-    expected_value = time_later - @current_time
+    actual_value   = @item.time_since_review(time_later).to_i
+    expected_value = (time_later - @current_time).to_i
     assert_equal(expected_value, actual_value)
 
     #For items that do...

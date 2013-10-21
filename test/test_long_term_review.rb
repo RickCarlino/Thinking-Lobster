@@ -3,8 +3,8 @@ require 'spec_helper'
 class LongTermReviewTest < Test::Unit::TestCase
 
   def setup
-    @current_time = Time.now
-    @new_item     = Item.create(review_due_at: @current_time)
+    @current_time  = Time.now
+    @item          = Item.create(review_due_at: @current_time)
     @current_time += 40.hours
   end
 
@@ -13,17 +13,18 @@ class LongTermReviewTest < Test::Unit::TestCase
   end
 
   def test_old_item_correct
-    @new_item.mark_correct!(@current_time)
-    assert_equal(1, @new_item.winning_streak)
-    assert_equal(0, @new_item.losing_streak)
-    assert_equal(@current_time+50.hours, @new_item.review_due_at)
+    @item.mark_correct!(@current_time)
+    assert_equal(1, @item.winning_streak)
+    assert_equal(0, @item.losing_streak)
+    expected_review_time = (@current_time + 50.hours).to_i
+    actual_review_time   = (@item.review_due_at).to_i
+    assert_equal(expected_review_time, actual_review_time)
   end
 
   def test_old_item_incorrect
-    @new_item.mark_incorrect!(@current_time)
-    assert_equal(0, @new_item.winning_streak)
-    assert_equal(1, @new_item.losing_streak)
-    assert_equal(@current_time+10.hours, @new_item.review_due_at)
+    @item.mark_incorrect!(@current_time)
+    assert_equal(0, @item.winning_streak)
+    assert_equal(1, @item.losing_streak)
   end
 
 end
