@@ -6,8 +6,7 @@ module ThinkingLobster
 #TODO:
   # [] Move all fixed numbers into user definable vars. eg. default review_due_at, intervals, etc
   # [x] Make protected members protected again
-  # [] Remove active support dependecy in favor of manual caluclations for .days, .hours, etc
-  # [] Consider implementing a time_since_review method to replace time_since_due
+  # [x] Consider implementing a time_since_review method to replace time_since_due
   # [x] Write documentation
   # [x] Update the readme.md
   # [] Github pages for sdoc documentation

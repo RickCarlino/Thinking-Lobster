@@ -25,6 +25,8 @@ class LongTermReviewTest < Test::Unit::TestCase
     @item.mark_incorrect!(@current_time)
     assert_equal(0, @item.winning_streak)
     assert_equal(1, @item.losing_streak)
+    expected_review_time = (@current_time + 10.hours).to_i
+    actual_review_time   = (@item.review_due_at).to_i
   end
 
 end
