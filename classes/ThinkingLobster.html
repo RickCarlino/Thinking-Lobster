@@ -49,6 +49,18 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create_interval">create_interval</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
         <dt>I</dt>
         <dd>
           <ul>
@@ -623,6 +635,43 @@ time by which the method compares.</p>
       <div class="sectiontitle">Instance Protected methods</div>
       
         <div class="method">
+          <div class="title method-title" id="method-i-create_interval">
+            
+              <b>create_interval</b>(multiplier, current_time = Time.now)
+            
+            <a href="../classes/ThinkingLobster.html#method-i-create_interval" name="method-i-create_interval" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Take a multiplier and a time, then returns a new interval.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create_interval_source')" id="l_method-i-create_interval_source">show</a>
+                
+              </p>
+              <div id="method-i-create_interval_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create_interval</span>(<span class="ruby-identifier">multiplier</span>, <span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+  <span class="ruby-identifier">seconds_ago</span>           = <span class="ruby-identifier">time_since_review</span>(<span class="ruby-identifier">current_time</span>)
+  <span class="ruby-identifier">new_interval</span>          = <span class="ruby-identifier">seconds_ago</span> * <span class="ruby-identifier">multiplier</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>    = <span class="ruby-identifier">current_time</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">new_interval</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
           <div class="title method-title" id="method-i-increment_losses">
             
               <b>increment_losses</b>()
@@ -648,7 +697,7 @@ time by which the method compares.</p>
                 
               </p>
               <div id="method-i-increment_losses_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 211</span>
+                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 214</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">increment_losses</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">times_reviewed</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">winning_streak</span>  = <span class="ruby-number">0</span>
@@ -685,7 +734,7 @@ time by which the method compares.</p>
                 
               </p>
               <div id="method-i-increment_wins_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 205</span>
+                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">increment_wins</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">times_reviewed</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">winning_streak</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
@@ -722,7 +771,7 @@ time by which the method compares.</p>
                 
               </p>
               <div id="method-i-new_item_correct_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 172</span>
+                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">new_item_correct</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
   <span class="ruby-comment">#Takes the interval between current_time and the time the item was due</span>
   <span class="ruby-comment"># And doubles that amount of time.</span>
@@ -766,7 +815,7 @@ time by which the method compares.</p>
                 
               </p>
               <div id="method-i-new_item_incorrect_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 185</span>
+                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 192</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">new_item_incorrect</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
   <span class="ruby-identifier">old_reviews</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">times_reviewed</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reset</span>(<span class="ruby-identifier">current_time</span>)
@@ -805,11 +854,9 @@ time by which the method compares.</p>
                 
               </p>
               <div id="method-i-old_item_correct_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 193</span>
+                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 200</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">old_item_correct</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
-  <span class="ruby-identifier">hours_ago</span>             = <span class="ruby-identifier">time_since_review</span>(<span class="ruby-identifier">current_time</span>)<span class="ruby-operator">/</span><span class="ruby-number">60</span><span class="ruby-operator">/</span><span class="ruby-number">60</span>
-  <span class="ruby-identifier">new_interval</span>          = (<span class="ruby-identifier">hours_ago</span> * <span class="ruby-identifier">@@config</span>[<span class="ruby-value">:old_positive_multiplier</span>]).<span class="ruby-identifier">hours</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>    = <span class="ruby-identifier">current_time</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">new_interval</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_interval</span>(<span class="ruby-identifier">@@config</span>[<span class="ruby-value">:old_positive_multiplier</span>] , <span class="ruby-identifier">current_time</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -842,11 +889,9 @@ time by which the method compares.</p>
                 
               </p>
               <div id="method-i-old_item_incorrect_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 199</span>
+                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">old_item_incorrect</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
-  <span class="ruby-identifier">hours_ago</span>             = <span class="ruby-identifier">time_since_review</span>(<span class="ruby-identifier">current_time</span>)<span class="ruby-operator">/</span><span class="ruby-number">60</span><span class="ruby-operator">/</span><span class="ruby-number">60</span>
-  <span class="ruby-identifier">new_interval</span>          = (<span class="ruby-identifier">hours_ago</span> * <span class="ruby-identifier">@@config</span>[<span class="ruby-value">:penalty</span>]).<span class="ruby-identifier">hours</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>    = <span class="ruby-identifier">current_time</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">new_interval</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_interval</span>(<span class="ruby-identifier">@@config</span>[<span class="ruby-value">:penalty</span>], <span class="ruby-identifier">current_time</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -879,7 +924,7 @@ time by which the method compares.</p>
                 
               </p>
               <div id="method-i-set_previous_review-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 217</span>
+                <pre><span class="ruby-comment"># File lib/thinking_lobster.rb, line 220</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">set_previous_review!</span>(<span class="ruby-identifier">current_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">previous_review?</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">previous_review</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">review_due_at</span>
