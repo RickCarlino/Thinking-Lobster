@@ -47,21 +47,22 @@ q.time_since_due
 #Returns number of seconds since it was due
 # => 2335243423
 
-# The point of using an SRS is reviewing LESS, not more. This method lets you know if its not time to review yet...
+# The point of using an SRS is reviewing LESS, not more.
+# This method lets you know if its not time to review yet...
 q.too_soon?
 # => true
 
-#When things go wrong
+#When things go wrong...
 q.reset
 q.save
-# Resets all learning data.
+# Resets all learning data for a particular item.
 
 # A bunch of configurations...
 ThinkingLobster.config
 # => {:cutoff=>129600, :first_interval=>7200, :new_positive_multiplier=>2.0, :old_positive_multiplier=>1.25, :penalty=>0.25}
 
 # If you know what you are doing, you can change them like this...
-self.config.merge!(penalty: 0.5)
+ThinkingLobster.config.merge!(penalty: 0.5)
 # => {:cutoff=>129600, :first_interval=>7200, :new_positive_multiplier=>2.0, :old_positive_multiplier=>1.25, :penalty=>0.5}
 # Don't do that unless you have a reason to, though.
 
@@ -78,10 +79,14 @@ or with bundler via
 
 ```gem 'thinking-lobster'```
 
-Testing
+Testing and Development
 ---
 
 ```rake test```
+
+Generate [documentation](http://rickcarlino.github.io/Thinking-Lobster/) with Sdoc.
+
+```sdoc lib/```
 
 License
 ---

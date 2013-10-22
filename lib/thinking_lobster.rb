@@ -1,20 +1,14 @@
 require 'mongoid'
 require 'active_support/time'
 
+# Provides a way of intelligently scheduling review times for learning items stored in a MongoDB database.
 module ThinkingLobster
 
 #TODO:
-  # [] Move all fixed numbers into user definable vars. eg. default review_due_at, intervals, etc
-  # [x] Make protected members protected again
-  # [x] Consider implementing a time_since_review method to replace time_since_due
-  # [x] Write documentation
-  # [x] Update the readme.md
-  # [] Github pages for sdoc documentation
   # [] wiki pages for use cases, design philosophy.
-  # [] Run a code coverage tool
+  # [] Run a test coverage tool
 
-  # Includes a set of fields and support methods into the base class. Mongoid
-  # must be included in the base class.
+  # Includes a set of fields and support methods into the base class. Mongoid must be included in the base class. Setup Mongoid before setting up this library.
   #
   # ==== Examples
   #   class FlashCard
@@ -24,7 +18,6 @@ module ThinkingLobster
   #     field :answer
   #   end
   def self.included(collection)
-    #Make all of the hardcoded 2's a user defined variable.
     collection.send :field, :times_reviewed,  type: Integer, default: 0
     collection.send :field, :winning_streak,  type: Integer, default: 0
     collection.send :field, :losing_streak,   type: Integer, default: 0
@@ -40,7 +33,6 @@ module ThinkingLobster
   # * (Float) :new_positive_multiplier - The number by which a new item's interval is multiplied by when correctly reviewed. Default value is 2. Increasing this number will shorten the number of short term reviews. Must be greater than 1.0 . Be aware that there is no such thing as a new_negative_multiplier because incorrect new items get reset to the system default when incorrect.
   # * (Float) :old_positive_multiplier - The number by which an old item's interval is multiplied by when correctly reviewed. Default value is 1.25. Increasing this number will shorten the number of long term item reviews. Must be greater than 1.0 .
   # * (Float) :Penalty - The number by which an old item's interval is multiplied by when incorrectly answered. Can be any number equal to or greater than 0 or less than 1.0. Default value is 0.25 .
-
   mattr_accessor :config
 
   self.config = {
@@ -58,7 +50,7 @@ module ThinkingLobster
   #    flash_card.mark_correct! # => #<SomeItem:0x123>
   #
   # Paramters:
-  # * (Time) current_time - Time object by which review times are set. This parameter is almost always left to its default value (Time.now) but may be useful for testing or special use cases.
+  # * (Time) current_time - Time object by which review times are set. This parameter is almost always left to its default value (Time.now) but may be changed for testing or special use cases.
   #
   # Returns an instance of the base class
   def mark_correct!(current_time = Time.now)
@@ -80,7 +72,7 @@ module ThinkingLobster
   #    flash_card.mark_incorrect! # => #<SomeItem:0x123>
   #
   # Parameters:
-  # * (Time) current_time - Time object by which review times are set. Defaults to Time.now This parameter is typically left to its default value but may be useful for testing or special use cases.
+  # * (Time) current_time - Time object by which review times are set. Defaults to Time.now . This parameter is typically left to its default value but may be changed for testing or special use cases.
   #
   # Returns an instance of the base class.
   def mark_incorrect!(current_time = Time.now)
@@ -95,7 +87,7 @@ module ThinkingLobster
     self
   end
 
-  # Indicates quantity of time since the item became ready for a review. This method is under consideration for deprecation in favor of a method which returns time since the last review.
+  # Indicates quantity of time since the item became ready for a review. This method is not used by ThinkingLobster at all, but may be useful as a helper method for application logic.
   #
   # Example: 
   #    flash_card = SomeDocument.new
@@ -135,7 +127,7 @@ module ThinkingLobster
   #    flash_card = SomeDocument.new
   #    flash_card.mark_correct! 
   #    flash_card.too_soon? # In this example, we just finished the review. So it won't be due for a few more hours.
-  #    # => false
+  #    # => true
   #
   # * (Time) current_time - Time object which defaults to Time.now. This is the time by which the method compares.
   #
@@ -145,7 +137,7 @@ module ThinkingLobster
     if too_soon then true else false end
   end
 
-  # Indicates if the item has a previous review set (which would indicate wether it is a newly added item).
+  # Indicates if the item has a previous review recorded (which would indicate wether it is a newly added item).
   #
   # Example:
   #    flash_card = SomeDocument.new
@@ -158,7 +150,16 @@ module ThinkingLobster
   def previous_review?
     self.previous_review != nil
   end
+
   # Resets all attributes related to spaced repetition. You still need to call save on the item to persist.
+  #
+  # Example:
+  #   really_bad_item.reset
+  #   really_bad_item.save
+  #   # => #<SomeItem:0x123> # This item is now a new item, for all practical purposes.
+  #
+  # Parameters:
+  # * (Time) current_time - The time that the items values will be reset to. Defaults to Time.now.
   def reset(current_time = Time.now)
     self.times_reviewed   = 0
     self.winning_streak   = 0
@@ -177,8 +178,6 @@ module ThinkingLobster
   end
 
   def new_item_correct(current_time = Time.now)
-    #Takes the interval between current_time and the time the item was due
-    # And doubles that amount of time.
     if self.previous_review?
       self.set_previous_review!
       self.review_due_at += time_since_review(current_time) * @@config[:new_positive_multiplier]
