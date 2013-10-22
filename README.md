@@ -13,6 +13,8 @@ This gem is still undergoing human testing. If you use this gem and have comment
 Examples
 ---
 
+**If you need extensive help, please see the [documentation](http://rickcarlino.github.io/Thinking-Lobster/)**
+
 ```ruby
 #after setting up mongoid and requiring ThinkingLobster
 class FlashCard
