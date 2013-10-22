@@ -44,8 +44,8 @@ module ThinkingLobster
   mattr_accessor :config
 
   self.config = {
-    cutoff:                  36.hours,
-    first_interval:          2.hours,
+    cutoff:                  36*60*60, #36 hours
+    first_interval:          2*60*60, #2 hours
     new_positive_multiplier: 2.0,
     old_positive_multiplier: 1.25,
     penalty:                 0.25
@@ -169,6 +169,13 @@ module ThinkingLobster
 
   protected
 
+  # Take a multiplier and a time, then returns a new interval.
+  def create_interval(multiplier, current_time = Time.now)
+    seconds_ago           = time_since_review(current_time)
+    new_interval          = seconds_ago * multiplier
+    self.review_due_at    = current_time + new_interval
+  end
+
   def new_item_correct(current_time = Time.now)
     #Takes the interval between current_time and the time the item was due
     # And doubles that amount of time.
@@ -191,15 +198,11 @@ module ThinkingLobster
   end
 
   def old_item_correct(current_time = Time.now)
-    hours_ago             = time_since_review(current_time)/60/60
-    new_interval          = (hours_ago * @@config[:old_positive_multiplier]).hours
-    self.review_due_at    = current_time + new_interval
+    self.create_interval(@@config[:old_positive_multiplier] , current_time)
   end
 
   def old_item_incorrect(current_time = Time.now)
-    hours_ago             = time_since_review(current_time)/60/60
-    new_interval          = (hours_ago * @@config[:penalty]).hours
-    self.review_due_at    = current_time + new_interval
+    self.create_interval(@@config[:penalty], current_time)
   end
 
   def increment_wins
