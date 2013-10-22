@@ -63,4 +63,5 @@ class ThinkingLobsterBaseTest < Test::Unit::TestCase
     @item.update_attributes(previous_review: Time.now - 6.hours)
     assert_equal(true, @item.previous_review?)
   end
+
 end
