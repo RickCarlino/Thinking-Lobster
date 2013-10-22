@@ -1,5 +1,7 @@
 Thinking Lobster (1.0.0 Alpha Release)
-[![Gem Version](https://badge.fury.io/rb/thinking_lobster.png)](http://badge.fury.io/rb/thinking_lobster)
+[![Gem Version](https://badge.fury.io/rb/thinking_lobster.png)](http://badge.fury.io/rb/thinking_lobster) [![Code Climate](https://codeclimate.com/github/rickcarlino/Thinking-Lobster.png)](https://codeclimate.com/github/rickcarlino/Thinking-Lobster)
+
+
 A Ruby gem to add [spaced repetion](http://en.wikipedia.org/wiki/Spaced_repetition) functionality to [Mongoid](http://mongoid.org/) documents.
 
 This gem is used for non-scaled, correct / incorrect review systems only. In that sense, it is more similar to the [Leitner System](http://en.wikipedia.org/wiki/Leitner_system) than scaled response algorithms, such as [SM Family of algorithms](http://www.supermemo.com/english/ol/sm2.htm).
