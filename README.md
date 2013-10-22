@@ -1,16 +1,19 @@
-Thinking Lobster (unreleased)
+Thinking Lobster (1.0.0 Alpha Release)
 ===
 
-A Ruby gem to add [spaced repetion](http://en.wikipedia.org/wiki/Spaced_repetition) functionality to [Mongoid](http://mongoid.org/) documents.
+A Ruby gem to add [spaced repetition](http://en.wikipedia.org/wiki/Spaced_repetition) functionality to [Mongoid](http://mongoid.org/) documents.
 
 This gem is used for non-scaled, correct / incorrect review systems only. In that sense, it is more similar to the [Leitner System](http://en.wikipedia.org/wiki/Leitner_system) than scaled response algorithms, such as [SM Family of algorithms](http://www.supermemo.com/english/ol/sm2.htm).
 
-**Although functional, this gem has yet to be published and is still in the testing phase.**
+I need feedback
+---
+This gem is still undergoing human testing. If you use this gem and have comments about the default intervals or questions about using it, please submit an issue.
 
 Examples
 ---
 
 ```ruby
+#after setting up mongoid and requiring ThinkingLobster
 class FlashCard
   include Mongoid::Document
   include ThinkingLobster
@@ -56,7 +59,7 @@ ThinkingLobster.config
 
 # If you know what you are doing, you can change them like this...
 self.config.merge!(penalty: 0.5)
-=> {:cutoff=>129600, :first_interval=>7200, :new_positive_multiplier=>2.0, :old_positive_multiplier=>1.25, :penalty=>0.5}
+# => {:cutoff=>129600, :first_interval=>7200, :new_positive_multiplier=>2.0, :old_positive_multiplier=>1.25, :penalty=>0.5}
 # Don't do that unless you have a reason to, though.
 
 ```

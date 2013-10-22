@@ -31,7 +31,7 @@ class ThinkingLobsterBaseTest < Test::Unit::TestCase
   end
 
   def test_time_since_due
-    #TODO: Refactor this. This test is not testing exact values, rather it is making sure the values are within atleast 1 second of eachother.
+    #I don't care about being a few miliseconds off, so I just rounded everything to the nearest second
     expected_value = (@current_time - @item.review_due_at).to_i
     actual_value   = (@item.time_since_due(@current_time)).to_i
     assert_equal(expected_value, actual_value)
