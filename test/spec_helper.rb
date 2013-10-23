@@ -1,7 +1,6 @@
 require 'test/unit'
 require 'mongo'
 require 'mongoid'
-require 'pry'
 
 #Make a simple document for test cases.
 require_relative '../lib/thinking_lobster.rb'
