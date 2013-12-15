@@ -99,3 +99,7 @@ Contributors
  * Brett Byler
 
 Please add your name to this list if submitting a pull request.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rickcarlino/thinking-lobster/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
