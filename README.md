@@ -72,12 +72,12 @@ Installation
 ---
 
 ```
-gem install thinking-lobster
+gem install thinking_lobster
 ```
 
 or with bundler via
 
-```gem 'thinking-lobster'```
+```gem 'thinking_lobster'```
 
 Testing and Development
 ---
